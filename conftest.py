@@ -1,7 +1,13 @@
+from dotenv import load_dotenv
+import os
 from selene import browser
 import pytest
 from selenium import webdriver
 from allure_attach import *
+
+
+# Загрузка переменных окружения из файла .env
+load_dotenv()
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -17,9 +23,15 @@ def browser_start():
         }
     }
 
+    # Получение учетных данных из переменных окружения
+    selenoid_user = os.getenv('SELENOID_USER')
+    selenoid_password = os.getenv('SELENOID_PASSWORD')
+    selenoid_host = os.getenv('SELENOID_HOST', 'selenoid.autotests.cloud')
+    selenoid_port = os.getenv('SELENOID_PORT', '4444')
+
     driver_options.capabilities.update(selenoid_capabilities)
 
-    selenoid_url = 'https://user1:1234@selenoid.autotests.cloud/wd/hub'
+    selenoid_url = f'https://{selenoid_user}:{selenoid_password}@{selenoid_host}/wd/hub'
     driver = webdriver.Remote(command_executor=selenoid_url, options=driver_options)
 
     browser.config.driver = driver

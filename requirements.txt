@@ -3,3 +3,4 @@ selene >= 2.0.0rc9
 selenium~=4.27.0
 allure-pytest == 2.13.5
 requests~=2.32.3
+python-dotenv~=1.0.1
