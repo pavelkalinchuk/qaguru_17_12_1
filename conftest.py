@@ -26,8 +26,7 @@ def browser_start():
     # Получение учетных данных из переменных окружения
     selenoid_user = os.getenv('SELENOID_USER')
     selenoid_password = os.getenv('SELENOID_PASSWORD')
-    selenoid_host = os.getenv('SELENOID_HOST', 'selenoid.autotests.cloud')
-    selenoid_port = os.getenv('SELENOID_PORT', '4444')
+    selenoid_host = os.getenv('SELENOID_HOST')
 
     driver_options.capabilities.update(selenoid_capabilities)
 
